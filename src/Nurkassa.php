@@ -9,6 +9,11 @@ use Nurkassa\HttpClients\HttpClientFactory;
 class Nurkassa
 {
     /**
+     * @const string Current SDK version
+     */
+    const CURRENT_SDK_VERSION = 'v1.0.0';
+
+    /**
      * @var string Access token
      */
     private $access_token;
@@ -34,5 +39,13 @@ class Nurkassa
         $this->client = new NurkassaClient(
             HttpClientFactory::createHttpClient($config['http_client_handler'])
         );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClient()
+    {
+        return $this->client;
     }
 }

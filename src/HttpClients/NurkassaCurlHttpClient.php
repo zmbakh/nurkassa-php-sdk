@@ -4,8 +4,15 @@
 namespace Nurkassa\HttpClients;
 
 
+use Nurkassa\Http\NurkassaResponse;
+use Nurkassa\Nurkassa;
+use Nurkassa\NurkassaClient;
+
 class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
 {
+    /**
+     * @var NurkassaCurlService
+     */
     protected $curlService;
 
     /**
@@ -13,37 +20,67 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
      */
     protected $response;
 
+    /**
+     * NurkassaCurlHttpClient constructor.
+     */
     public function __construct()
     {
         $this->curlService = new NurkassaCurlService();
     }
 
 
-    public function get($url, $headers)
+    /**
+     * @param string $url
+     * @param array $headers
+     * @return mixed|void
+     * @throws \Exception
+     */
+    public function get(string $url, array $headers = [])
     {
-        return $this->request($url, 'get', null, $headers, 60);
+        return $this->request($url, 'GET', null, $headers, 60);
     }
 
 
-    public function post($url, $body, $headers)
+    /**
+     * @param string $url
+     * @param array $body
+     * @param array $headers
+     * @param bool $multipart
+     * @return mixed|void
+     * @throws \Exception
+     */
+    public function post(string $url, array $body, array $headers = [], bool $multipart = false)
     {
-        return $this->request($url, 'post', $body, $headers, 60);
+        return $this->request($url, 'POST', $body, $headers, 60);
     }
 
 
-    public function put($url, $body, $headers)
+    /**
+     * @param string $url
+     * @param array $body
+     * @param array $headers
+     * @param bool $multipart
+     * @return mixed|void
+     * @throws \Exception
+     */
+    public function put(string $url, array $body, array $headers = [], bool $multipart = false)
     {
         //TODO add _method=put
 
-        return $this->request($url, 'post', $body, $headers, 60);
+        return $this->request($url, 'POST', $body, $headers, 60);
     }
 
 
-    public function delete($url, $headers)
+    /**
+     * @param string $url
+     * @param array $headers
+     * @return mixed|void
+     * @throws \Exception
+     */
+    public function delete(string $url, array $headers = [])
     {
-        //TODO add _method=delete
-
-        return $this->request($url, 'post', $body, $headers, 60);
+        $body['_method'] = 'delete';
+        return $this->request($url, 'POST', $body, $headers, 60);
     }
 
     /**
@@ -52,6 +89,7 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
      * @param $body
      * @param $headers
      * @param int $timeOut
+     * @return NurkassaResponse
      * @throws \Exception
      */
     public function request($url, $method, $body, $headers, int $timeOut = 60) {
@@ -62,11 +100,13 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
             throw new \Exception($this->curlService->error(), $curlErrorCode);
         }
 
-        list($headers, $body) = $this->getHeadersAndBodyArray();
+        list($headers, $body) = $this->getHeadersAndBody();
+
+        $body = json_decode($body, true);
 
         $this->closeConnection();
 
-        //return new GraphRawResponse($headers, $body);
+        return new NurkassaResponse($headers, $body);
     }
 
 
@@ -142,7 +182,7 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
      *
      * @return array
      */
-    public function getHeadersAndBodyArray()
+    public function getHeadersAndBody()
     {
         $parts = explode("\r\n\r\n", $this->response);
 

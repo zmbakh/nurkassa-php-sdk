@@ -1,5 +1,5 @@
 {
-    "name": "krgHydra/nurkassa-php-sdk",
+    "name": "krg-hydra/nurkassa-php-sdk",
     "description": "A php SDK for working with the API of Nurkassa. Created by the owner company.",
     "keywords": ["php", "sdk", "nurkassa"],
     "type": "library",
@@ -15,7 +15,7 @@
 		"php": ">=7.1"
     },
     "require-dev": {
-		"phpunit/phpunit": "6.*"
+		"phpunit/phpunit": "8.*"
     },
     "autoload": {
         "psr-4": {
