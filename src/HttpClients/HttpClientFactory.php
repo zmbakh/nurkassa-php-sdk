@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nurkassa\HttpClients;
-
 
 use Exception;
 use GuzzleHttp\Client;
@@ -11,11 +9,13 @@ use InvalidArgumentException;
 class HttpClientFactory
 {
     /**
-     * Return Http Client Handler
+     * Return Http Client Handler.
      *
      * @param $client
-     * @return NurkassaCurlHttpClient|NurkassaGuzzleHttpClient|Client
+     *
      * @throws Exception
+     *
+     * @return NurkassaCurlHttpClient|NurkassaGuzzleHttpClient|Client
      */
     public static function createHttpClient($client)
     {
@@ -23,7 +23,7 @@ class HttpClientFactory
             return self::defaultHttpClient();
         }
 
-        if(is_string($client)) {
+        if (is_string($client)) {
             return self::handleStringArgument($client);
         }
 
@@ -31,11 +31,13 @@ class HttpClientFactory
     }
 
     /**
-     * Handles client if the argument is string
+     * Handles client if the argument is string.
      *
      * @param $client
-     * @return NurkassaCurlHttpClient|NurkassaGuzzleHttpClient|void
+     *
      * @throws Exception
+     *
+     * @return NurkassaCurlHttpClient|NurkassaGuzzleHttpClient|void
      */
     protected static function handleStringArgument($client)
     {
@@ -48,7 +50,7 @@ class HttpClientFactory
         }
 
         if ('guzzle' === $client) {
-            if(!class_exists('GuzzleHttp\Client')) {
+            if (!class_exists('GuzzleHttp\Client')) {
                 throw new Exception('The Guzzle HTTP client must be included in order to use the "guzzle" handler.');
             }
 
@@ -59,9 +61,10 @@ class HttpClientFactory
     }
 
     /**
-     * Return client
+     * Return client.
      *
      * @param $client
+     *
      * @return mixed
      */
     protected static function handleClient($client)
@@ -83,11 +86,12 @@ class HttpClientFactory
 
 
     /**
-     * Set default client
+     * Set default client.
      *
      * @return NurkassaCurlHttpClient|NurkassaGuzzleHttpClient
      */
-    protected static function defaultHttpClient() {
+    protected static function defaultHttpClient()
+    {
 
         if (extension_loaded('curl')) {
             return new NurkassaCurlHttpClient();
@@ -99,4 +103,5 @@ class HttpClientFactory
 
         throw new InvalidArgumentException('The SDK requires CUrl or Guzzle.');
     }
+
 }

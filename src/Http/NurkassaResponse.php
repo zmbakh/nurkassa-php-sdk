@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nurkassa\Http;
-
 
 class NurkassaResponse
 {
@@ -31,12 +29,12 @@ class NurkassaResponse
     public function __construct($headers, $body, $statusCode = null)
     {
         if (is_numeric($statusCode)) {
-            $this->statusCode = (int)$statusCode;
+            $this->statusCode = (int) $statusCode;
         }
 
         $this->body = $body;
 
-        if(is_array($headers)) {
+        if (is_array($headers)) {
             $this->headers = $headers;
         } else {
             $this->makeArrayOfHeaders($headers);
@@ -104,4 +102,5 @@ class NurkassaResponse
     {
         return $this->statusCode;
     }
+
 }

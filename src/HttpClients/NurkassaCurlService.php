@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nurkassa\HttpClients;
-
 
 class NurkassaCurlService
 {
@@ -12,7 +10,7 @@ class NurkassaCurlService
     protected $curl;
 
     /**
-     * Make a new curl reference instance
+     * Make a new curl reference instance.
      */
     public function init()
     {
@@ -20,7 +18,7 @@ class NurkassaCurlService
     }
 
     /**
-     * Set a curl option
+     * Set a curl option.
      *
      * @param $key
      * @param $value
@@ -31,7 +29,7 @@ class NurkassaCurlService
     }
 
     /**
-     * Set an array of options to a curl resource
+     * Set an array of options to a curl resource.
      *
      * @param array $options
      */
@@ -41,7 +39,7 @@ class NurkassaCurlService
     }
 
     /**
-     * Send a curl request
+     * Send a curl request.
      *
      * @return mixed
      */
@@ -51,7 +49,7 @@ class NurkassaCurlService
     }
 
     /**
-     * Return the curl error number
+     * Return the curl error number.
      *
      * @return int
      */
@@ -61,7 +59,7 @@ class NurkassaCurlService
     }
 
     /**
-     * Return the curl error message
+     * Return the curl error message.
      *
      * @return string
      */
@@ -71,7 +69,7 @@ class NurkassaCurlService
     }
 
     /**
-     * Get info from a curl reference
+     * Get info from a curl reference.
      *
      * @param $type
      *
@@ -83,7 +81,7 @@ class NurkassaCurlService
     }
 
     /**
-     * Get the currently installed curl version
+     * Get the currently installed curl version.
      *
      * @return array
      */
@@ -93,10 +91,11 @@ class NurkassaCurlService
     }
 
     /**
-     * Close the resource connection to curl
+     * Close the resource connection to curl.
      */
     public function close()
     {
         curl_close($this->curl);
     }
+
 }

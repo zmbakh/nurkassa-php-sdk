@@ -1,9 +1,8 @@
 <?php
 
-
 namespace Nurkassa\HttpClients;
 
-
+use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\Http\NurkassaResponse;
 use Nurkassa\Nurkassa;
 use Nurkassa\NurkassaClient;
@@ -16,7 +15,7 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
     protected $curlService;
 
     /**
-     * @var string|boolean The raw response from the server
+     * @var string|bool The raw response from the server
      */
     protected $response;
 
@@ -28,72 +27,14 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
         $this->curlService = new NurkassaCurlService();
     }
 
-
     /**
-     * @param string $url
-     * @param array $headers
-     * @return mixed|void
-     * @throws \Exception
-     */
-    public function get(string $url, array $headers = [])
-    {
-        return $this->request($url, 'GET', null, $headers, 60);
-    }
-
-
-    /**
-     * @param string $url
-     * @param array $body
-     * @param array $headers
-     * @param bool $multipart
-     * @return mixed|void
-     * @throws \Exception
-     */
-    public function post(string $url, array $body, array $headers = [], bool $multipart = false)
-    {
-        return $this->request($url, 'POST', $body, $headers, 60);
-    }
-
-
-    /**
-     * @param string $url
-     * @param array $body
-     * @param array $headers
-     * @param bool $multipart
-     * @return mixed|void
-     * @throws \Exception
-     */
-    public function put(string $url, array $body, array $headers = [], bool $multipart = false)
-    {
-        //TODO add _method=put
-
-        return $this->request($url, 'POST', $body, $headers, 60);
-    }
-
-
-    /**
-     * @param string $url
-     * @param array $headers
-     * @return mixed|void
-     * @throws \Exception
-     */
-    public function delete(string $url, array $headers = [])
-    {
-        $body['_method'] = 'delete';
-        return $this->request($url, 'POST', $body, $headers, 60);
-    }
-
-    /**
-     * @param $url
-     * @param $method
-     * @param $body
-     * @param $headers
-     * @param int $timeOut
+     * @param NurkassaRequest $request
      * @return NurkassaResponse
      * @throws \Exception
      */
-    public function request($url, $method, $body, $headers, int $timeOut = 60) {
-        $this->openConnection($url, $method, $body, $headers, $timeOut);
+    public function send(NurkassaRequest $request)
+    {
+        $this->openConnection($request);
         $this->executeRequest();
 
         if ($curlErrorCode = $this->curlService->errno()) {
@@ -109,24 +50,19 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
         return new NurkassaResponse($headers, $body);
     }
 
-
     /**
      * Opens a new curl connection.
      *
-     * @param string $url     The endpoint to send the request to.
-     * @param string $method  The request method.
-     * @param string $body    The body of the request.
-     * @param array  $headers The request headers.
-     * @param int    $timeOut The timeout in seconds for the request.
+     * @param NurkassaRequest $request
      */
-    public function openConnection($url, $method, $body, array $headers, int $timeOut)
+    public function openConnection(NurkassaRequest $request)
     {
         $options = [
-            CURLOPT_CUSTOMREQUEST => $method,
-            CURLOPT_HTTPHEADER => $this->makeCurlHeadersArray($headers),
-            CURLOPT_URL => $url,
+            CURLOPT_CUSTOMREQUEST => $request->getMethod(),
+            CURLOPT_HTTPHEADER => $this->makeCurlHeadersArray($request->getHeaders()),
+            CURLOPT_URL => $request->getUrl(),
             CURLOPT_CONNECTTIMEOUT => 10,
-            CURLOPT_TIMEOUT => $timeOut,
+            CURLOPT_TIMEOUT =>  $request->getTimeout(),
             CURLOPT_RETURNTRANSFER => true, // Return response as string
             CURLOPT_HEADER => true, // Enable header processing
             CURLOPT_SSL_VERIFYHOST => 2,
@@ -134,14 +70,13 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
             //CURLOPT_CAINFO => __DIR__ . '/certs/RootCA.pem',
         ];
 
-        if ($method !== "GET") {
-            $options[CURLOPT_POSTFIELDS] = $body;
+        if ($request->getMethod() !== 'GET') {
+            $options[CURLOPT_POSTFIELDS] = $request->getBody();
         }
 
         $this->curlService->init();
         $this->curlService->setoptArray($options);
     }
-
 
     /**
      * Make a curl-friendly array of headers.
@@ -154,15 +89,14 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
         $return = [];
 
         foreach ($headers as $key => $value) {
-            $return[] = $key . ': ' . $value;
+            $return[] = $key.': '.$value;
         }
 
         return $return;
     }
 
-
     /**
-     * Send the request
+     * Send the request.
      */
     public function executeRequest()
     {
@@ -170,7 +104,7 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
     }
 
     /**
-     * Closes an existing curl connection
+     * Closes an existing curl connection.
      */
     public function closeConnection()
     {
@@ -178,7 +112,7 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
     }
 
     /**
-     * Extracts the headers and the body into a two-part array
+     * Extracts the headers and the body into a two-part array.
      *
      * @return array
      */
@@ -191,4 +125,5 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
 
         return [trim($headers), trim($body)];
     }
+
 }
