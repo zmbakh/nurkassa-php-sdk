@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nurkassa;
-
 
 use Nurkassa\HttpClients\HttpClientFactory;
 
@@ -25,7 +23,9 @@ class Nurkassa
 
     /**
      * Nurkassa constructor.
+     *
      * @param array $config
+     *
      * @throws \Exception
      */
     public function __construct(array $config = [])

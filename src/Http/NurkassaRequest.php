@@ -45,11 +45,12 @@ class NurkassaRequest
 
     /**
      * NurkassaRequest constructor.
-     * @param string $method
-     * @param string $url
+     *
+     * @param string     $method
+     * @param string     $url
      * @param array|null $body
      * @param array|null $headers
-     * @param int|null $timeout
+     * @param int|null   $timeout
      */
     public function __construct(string $method, string $url, array $body = null, array $headers = null, int $timeout = null)
     {
@@ -72,31 +73,33 @@ class NurkassaRequest
     }
 
     /**
-     * Set common headers
+     * Set common headers.
      *
      * @return void
      */
     protected function prepareCommonHeaders()
     {
-        $protocol = $_SERVER['HTTPS'] === 'on' ? 'https://' :'http://';
+        $protocol = $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
         $hostName = $_SERVER['HTTP_HOST'];
-        $url = $protocol . $hostName;
+        $url = $protocol.$hostName;
 
         $this->headers = [
-            'Accept' => 'application/json',
+            'Accept'         => 'application/json',
             'Accept-Charset' => 'utf-8',
-            'User-Agent' => 'Nurkassa PHP SDK ' . Nurkassa::CURRENT_SDK_VERSION,
-            'Referer' => $url,
+            'User-Agent'     => 'Nurkassa PHP SDK '.Nurkassa::CURRENT_SDK_VERSION,
+            'Referer'        => $url,
         ];
     }
 
     /**
      * @param string $url
+     *
      * @return NurkassaRequest
      */
-    public function setUrl(string $url): NurkassaRequest
+    public function setUrl(string $url): self
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -110,21 +113,25 @@ class NurkassaRequest
 
     /**
      * @param array $headers
+     *
      * @return NurkassaRequest
      */
-    public function setHeaders(array $headers): NurkassaRequest
+    public function setHeaders(array $headers): self
     {
         $this->headers = $headers;
+
         return $this;
     }
 
     /**
      * @param array $headers
+     *
      * @return NurkassaRequest
      */
-    public function addHeaders(array $headers): NurkassaRequest
+    public function addHeaders(array $headers): self
     {
         $this->headers = array_merge($this->headers, $headers);
+
         return $this;
     }
 
@@ -135,7 +142,7 @@ class NurkassaRequest
     {
         if ($this->hasFiles()) {
             $this->setBodyMultipart();
-            $header = ['Content-Type' => 'multipart/form-data; boundary=' . $this->body->getBoundary()];
+            $header = ['Content-Type' => 'multipart/form-data; boundary='.$this->body->getBoundary()];
         } else {
             $header = ['Content-Type' => 'application/x-www-form-urlencoded'];
         }
@@ -159,11 +166,13 @@ class NurkassaRequest
 
     /**
      * @param array $params
+     *
      * @return NurkassaRequest
      */
-    public function setParams(array $params): NurkassaRequest
+    public function setParams(array $params): self
     {
         $this->params = $params;
+
         return $this;
     }
 
@@ -183,11 +192,13 @@ class NurkassaRequest
 
     /**
      * @param int $timeout
+     *
      * @return NurkassaRequest
      */
-    public function setTimeout(int $timeout): NurkassaRequest
+    public function setTimeout(int $timeout): self
     {
         $this->timeout = $timeout;
+
         return $this;
     }
 
@@ -216,13 +227,13 @@ class NurkassaRequest
     {
         $params = $this->getParams();
 
-        if (!$this->body instanceof RequestBodyMultipart){
+        if (!$this->body instanceof RequestBodyMultipart) {
             $this->body = new RequestBodyMultipart($params);
         }
     }
 
     /**
-     * Checks if has files to upload
+     * Checks if has files to upload.
      *
      * @return bool
      */

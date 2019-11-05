@@ -102,5 +102,4 @@ class NurkassaResponse
     {
         return $this->statusCode;
     }
-
 }

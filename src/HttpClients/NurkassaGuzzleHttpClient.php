@@ -2,12 +2,11 @@
 
 namespace Nurkassa\HttpClients;
 
-use Nurkassa\Http\NurkassaResponse;
-
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Ring\Exception\RingException;
-use GuzzleHttp\Exception\RequestException;
+use Nurkassa\Http\NurkassaResponse;
 
 class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
 {
@@ -18,6 +17,7 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
 
     /**
      * NurkassaGuzzleHttpClient constructor.
+     *
      * @param Client|null $guzzleClient
      */
     public function __construct(Client $guzzleClient = null)
@@ -31,11 +31,11 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
      *
      * @param $url
      * @param $headers
+     *
      * @return mixed
      */
     public function get(string $url, array $headers = [])
     {
-
     }
 
     /**
@@ -45,46 +45,45 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
      * @param $body
      * @param $headers
      * @param bool $multipart
+     *
      * @return mixed
      */
     public function post(string $url, array $body, array $headers = [], bool $multipart = false)
     {
-
     }
 
     /**
      * Send a put request.
      *
      * @param string $url
-     * @param array $body
-     * @param array $headers
-     * @param bool $multipart
+     * @param array  $body
+     * @param array  $headers
+     * @param bool   $multipart
+     *
      * @return mixed
      */
     public function put(string $url, array $body, array $headers = [], bool $multipart = false)
     {
-
     }
 
     /**
      * Send a delete request.
      *
      * @param string $url
-     * @param array $headers
+     * @param array  $headers
+     *
      * @return mixed
      */
     public function delete(string $url, array $headers = [])
     {
-
     }
-
 
     /**
      * @param $url
      * @param $method
      * @param array $body
      * @param array $headers
-     * @param int $timeOut
+     * @param int   $timeOut
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      *
@@ -93,9 +92,9 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
     public function request($url, $method, array $body, array $headers, int $timeOut)
     {
         $options = [
-            'headers' => $headers,
-            'body' => $body,
-            'timeout' => $timeOut,
+            'headers'         => $headers,
+            'body'            => $body,
+            'timeout'         => $timeOut,
             'connect_timeout' => 10,
             //'verify' => __DIR__ . '/certs/RootCA.pem',
         ];
@@ -119,7 +118,6 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
         return new NurkassaResponse($rawHeaders, $rawBody, $httpStatusCode);
     }
 
-
     /**
      * Returns the Guzzle array of headers as a string.
      *
@@ -132,7 +130,7 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
         $headers = $response->getHeaders();
         $rawHeaders = [];
         foreach ($headers as $name => $values) {
-            $rawHeaders[] = $name . ": " . implode(", ", $values);
+            $rawHeaders[] = $name.': '.implode(', ', $values);
         }
 
         return implode("\r\n", $rawHeaders);

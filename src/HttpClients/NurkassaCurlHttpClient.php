@@ -4,8 +4,6 @@ namespace Nurkassa\HttpClients;
 
 use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\Http\NurkassaResponse;
-use Nurkassa\Nurkassa;
-use Nurkassa\NurkassaClient;
 
 class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
 {
@@ -29,8 +27,10 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
 
     /**
      * @param NurkassaRequest $request
-     * @return NurkassaResponse
+     *
      * @throws \Exception
+     *
+     * @return NurkassaResponse
      */
     public function send(NurkassaRequest $request)
     {
@@ -58,13 +58,13 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
     public function openConnection(NurkassaRequest $request)
     {
         $options = [
-            CURLOPT_CUSTOMREQUEST => $request->getMethod(),
-            CURLOPT_HTTPHEADER => $this->makeCurlHeadersArray($request->getHeaders()),
-            CURLOPT_URL => $request->getUrl(),
+            CURLOPT_CUSTOMREQUEST  => $request->getMethod(),
+            CURLOPT_HTTPHEADER     => $this->makeCurlHeadersArray($request->getHeaders()),
+            CURLOPT_URL            => $request->getUrl(),
             CURLOPT_CONNECTTIMEOUT => 10,
-            CURLOPT_TIMEOUT =>  $request->getTimeout(),
+            CURLOPT_TIMEOUT        => $request->getTimeout(),
             CURLOPT_RETURNTRANSFER => true, // Return response as string
-            CURLOPT_HEADER => true, // Enable header processing
+            CURLOPT_HEADER         => true, // Enable header processing
             CURLOPT_SSL_VERIFYHOST => 2,
             CURLOPT_SSL_VERIFYPEER => true,
             //CURLOPT_CAINFO => __DIR__ . '/certs/RootCA.pem',
@@ -82,6 +82,7 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
      * Make a curl-friendly array of headers.
      *
      * @param array $headers The request headers.
+     *
      * @return array
      */
     public function makeCurlHeadersArray(array $headers)
@@ -125,5 +126,4 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
 
         return [trim($headers), trim($body)];
     }
-
 }
