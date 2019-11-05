@@ -2,6 +2,8 @@
 
 namespace Nurkassa;
 
+use Nurkassa\Http\NurkassaRequest;
+use Nurkassa\Http\NurkassaResponse;
 use Nurkassa\HttpClients\HttpClientFactory;
 
 class Nurkassa
@@ -49,8 +51,26 @@ class Nurkassa
         return $this->client;
     }
 
-    public function __call($name, $arguments)
+    /**
+     * @param NurkassaRequest $request
+     * @return NurkassaResponse
+     */
+    public function handleRequest(NurkassaRequest $request): NurkassaResponse
     {
-        // TODO: Implement __call() method.
+        if ($this->access_token) {
+            $request->addHeaders(['Authorization' => 'Bearer '.$this->access_token]);
+        }
+
+        return $this->client->getHttpClient()->send($request);
+    }
+
+    /**
+     * @param string $access_token
+     * @return Nurkassa
+     */
+    public function setAccessToken(string $access_token): Nurkassa
+    {
+        $this->access_token = $access_token;
+        return $this;
     }
 }

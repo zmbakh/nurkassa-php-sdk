@@ -5,6 +5,7 @@ namespace Nurkassa\Http;
 use Nurkassa\Http\Body\RequestBodyMultipart;
 use Nurkassa\Http\Body\RequestBodyUrlEncoded;
 use Nurkassa\Nurkassa;
+use Nurkassa\NurkassaClient;
 
 class NurkassaRequest
 {
@@ -57,7 +58,7 @@ class NurkassaRequest
         $this->prepareCommonHeaders();
 
         $this->method = strtoupper($method);
-        $this->url = $url;
+        $this->url = $this->makeValidUrl($url);
 
         if ($body) {
             $this->params = $body;
@@ -98,9 +99,27 @@ class NurkassaRequest
      */
     public function setUrl(string $url): self
     {
-        $this->url = $url;
+        $this->url = $this->makeValidUrl($url);
 
         return $this;
+    }
+
+    /**
+     * @param $url
+     *
+     * @return string
+     */
+    protected function makeValidUrl($url)
+    {
+        if (strtolower(substr($url, 0, 4)) !== 'http') {
+            if ($url[0] === '/') {
+                $url = mb_substr($url, 1);
+            }
+
+            $url = NurkassaClient::BASE_API_URL.$url;
+        }
+
+        return $url;
     }
 
     /**
@@ -108,7 +127,13 @@ class NurkassaRequest
      */
     public function getUrl(): string
     {
-        return $this->url;
+        $url = $this->url;
+
+        if ($this->getMethod() == 'GET') {
+            $url = $this->appendParamsToUrl($url, $this->params);
+        }
+
+        return $url;
     }
 
     /**
@@ -191,6 +216,18 @@ class NurkassaRequest
     }
 
     /**
+     * @param array $params
+     *
+     * @return NurkassaRequest
+     */
+    public function addParams(array $params): self
+    {
+        $this->params = array_merge($this->params, $params);
+
+        return $this;
+    }
+
+    /**
      * @param int $timeout
      *
      * @return NurkassaRequest
@@ -252,5 +289,34 @@ class NurkassaRequest
         }
 
         return 'POST';
+    }
+
+
+    /**
+     * @param $url
+     * @param array $newParams
+     * @return string
+     */
+    protected function appendParamsToUrl($url, array $newParams = [])
+    {
+        if (empty($newParams)) {
+            return $url;
+        }
+
+        if (strpos($url, '?') === false) {
+            return $url . '?' . http_build_query($newParams, null, '&');
+        }
+
+        list($path, $query) = explode('?', $url, 2);
+        $existingParams = [];
+        parse_str($query, $existingParams);
+
+        // Favor params from the original URL over $newParams
+        $newParams = array_merge($newParams, $existingParams);
+
+        // Sort for a predicable order
+        ksort($newParams);
+
+        return $path . '?' . http_build_query($newParams, null, '&');
     }
 }
