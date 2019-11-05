@@ -48,4 +48,9 @@ class Nurkassa
     {
         return $this->client;
     }
+
+    public function __call($name, $arguments)
+    {
+        // TODO: Implement __call() method.
+    }
 }

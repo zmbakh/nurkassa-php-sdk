@@ -144,7 +144,7 @@ class NurkassaRequest
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getBody(): string
     {
@@ -172,7 +172,13 @@ class NurkassaRequest
      */
     public function getParams(): array
     {
-        return $this->params;
+        $params = $this->params;
+
+        if (in_array($this->method, ['PUT', 'DELETE'])) {
+            $params = array_merge($params, ['_method' => $this->method]);
+        }
+
+        return $params;
     }
 
     /**
@@ -230,6 +236,10 @@ class NurkassaRequest
      */
     public function getMethod(): string
     {
-        return $this->method;
+        if ($this->method == 'GET') {
+            return $this->method;
+        }
+
+        return 'POST';
     }
 }

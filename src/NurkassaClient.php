@@ -4,6 +4,7 @@
 namespace Nurkassa;
 
 
+use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\HttpClients\NurkassaHttpClientInterface;
 
 class NurkassaClient
@@ -24,11 +25,6 @@ class NurkassaClient
      */
     protected $httpClient;
 
-    /**
-     * @var array Common headers for requests
-     */
-    protected $commonHeaders;
-
 
     /**
      * NurkassaClient constructor.
@@ -37,27 +33,21 @@ class NurkassaClient
     public function __construct(NurkassaHttpClientInterface $client = null)
     {
         $this->httpClient = $client;
-
-        $this->prepareCommonHeaders();
     }
 
-    /**
-     * Set common headers
-     *
-     * @return void
-     */
-    protected function prepareCommonHeaders()
+    public function requestExampleTemporary()
     {
-        $protocol = $_SERVER['HTTPS'] === 'on' ? 'https://' :'http://';
-        $hostName = $_SERVER['HTTP_HOST'];
-        $url = $protocol . $hostName;
+        $url = $this->makeValidUrl('/company/cashiers/9542');
 
-        $this->commonHeaders = [
-            'Accept' => 'application/json',
-            'Accept-Charset' => 'utf-8',
-            'User-Agent' => 'Nurkassa PHP SDK ' . Nurkassa::CURRENT_SDK_VERSION,
-            'Referer' => $url,
+        $body = [
+            'name' => 'Новое имя',
+            'phone_number' => '+775411221122',
+            'poses' => [
+                1742, 1743, 1739
+            ],
         ];
+
+        return $this->httpClient->send(new NurkassaRequest('put', $url, $body, ['Authorization' => 'Bearer h2rOjGoWhofLZHLO9K0xW3h8Pyfml7RG7ikLXSemHNhmaSgBrgDXNu5NMNs6']));
     }
 
 
