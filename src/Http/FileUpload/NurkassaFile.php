@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nurkassa\Http\FileUpload;
-
 
 class NurkassaFile
 {
@@ -30,8 +28,8 @@ class NurkassaFile
      * Creates a new FacebookFile entity.
      *
      * @param string $filePath
-     * @param int $maxLength
-     * @param int $offset
+     * @param int    $maxLength
+     * @param int    $offset
      *
      * @throws \Exception
      */
@@ -59,13 +57,13 @@ class NurkassaFile
     public function open()
     {
         if (!$this->isRemoteFile($this->path) && !is_readable($this->path)) {
-            throw new \Exception('Failed to create FacebookFile entity. Unable to read resource: ' . $this->path . '.');
+            throw new \Exception('Failed to create FacebookFile entity. Unable to read resource: '.$this->path.'.');
         }
 
         $this->stream = fopen($this->path, 'r');
 
         if (!$this->stream) {
-            throw new \Exception('Failed to create FacebookFile entity. Unable to open resource: ' . $this->path . '.');
+            throw new \Exception('Failed to create FacebookFile entity. Unable to open resource: '.$this->path.'.');
         }
     }
 
@@ -134,7 +132,7 @@ class NurkassaFile
      *
      * @param string $pathToFile
      *
-     * @return boolean
+     * @return bool
      */
     protected function isRemoteFile($pathToFile)
     {

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nurkassa\Http\Body;
-
 
 class RequestBodyUrlEncoded implements NurkassaBodyInterface
 {
@@ -22,7 +20,7 @@ class RequestBodyUrlEncoded implements NurkassaBodyInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getBody()
     {

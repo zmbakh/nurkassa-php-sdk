@@ -84,7 +84,6 @@ class HttpClientFactory
         throw new InvalidArgumentException('The http client handler must be implementation of HttpClients\NurkassaHttpClientInterface or instance of GuzzleHttp\Client.');
     }
 
-
     /**
      * Set default client.
      *
@@ -92,7 +91,6 @@ class HttpClientFactory
      */
     protected static function defaultHttpClient()
     {
-
         if (extension_loaded('curl')) {
             return new NurkassaCurlHttpClient();
         }
@@ -103,5 +101,4 @@ class HttpClientFactory
 
         throw new InvalidArgumentException('The SDK requires CUrl or Guzzle.');
     }
-
 }

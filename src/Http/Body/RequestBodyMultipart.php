@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nurkassa\Http\Body;
-
 
 use Nurkassa\Http\FileUpload\NurkassaFile;
 
@@ -36,7 +34,7 @@ class RequestBodyMultipart implements NurkassaBodyInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getBody()
     {
@@ -60,7 +58,7 @@ class RequestBodyMultipart implements NurkassaBodyInterface
     }
 
     /**
-     * Get the boundary
+     * Get the boundary.
      *
      * @return string
      */
@@ -72,7 +70,7 @@ class RequestBodyMultipart implements NurkassaBodyInterface
     /**
      * Get the string needed to transfer a file.
      *
-     * @param string $name
+     * @param string       $name
      * @param NurkassaFile $file
      *
      * @return string

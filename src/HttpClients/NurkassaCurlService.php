@@ -97,5 +97,4 @@ class NurkassaCurlService
     {
         curl_close($this->curl);
     }
-
 }
