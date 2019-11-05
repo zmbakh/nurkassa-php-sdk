@@ -53,6 +53,7 @@ class Nurkassa
 
     /**
      * @param NurkassaRequest $request
+     *
      * @return NurkassaResponse
      */
     public function handleRequest(NurkassaRequest $request): NurkassaResponse
@@ -66,11 +67,13 @@ class Nurkassa
 
     /**
      * @param string $access_token
+     *
      * @return Nurkassa
      */
-    public function setAccessToken(string $access_token): Nurkassa
+    public function setAccessToken(string $access_token): self
     {
         $this->access_token = $access_token;
+
         return $this;
     }
 }
