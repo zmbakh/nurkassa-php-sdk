@@ -27,7 +27,7 @@ class CashierModel extends Model
      * @param string $name
      * @param string $phone_number
      * @param string $password
-     * @param array $poses
+     * @param array  $poses
      *
      * @return NurkassaRequest
      */
@@ -47,9 +47,9 @@ class CashierModel extends Model
 
     /**
      * Update the cashier's info
-     * Обновить данные кассира
+     * Обновить данные кассира.
      *
-     * @param integer $id
+     * @param int   $id
      * @param array $attributes See the API documentation for more info.
      *
      * @return NurkassaRequest
@@ -60,7 +60,6 @@ class CashierModel extends Model
 
         return $this->last_request;
     }
-
 
     /**
      * Display the trashed cashiers list of the company.
