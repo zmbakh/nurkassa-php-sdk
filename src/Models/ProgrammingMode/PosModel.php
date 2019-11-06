@@ -65,6 +65,7 @@ class PosModel extends Model
 
     /**
      * Get the shifts of the POS.
+     * Получить список смен кассы.
      *
      * @param int    $id
      * @param string $dateFrom Show shifts from the date YYYY-mm-dd (including)

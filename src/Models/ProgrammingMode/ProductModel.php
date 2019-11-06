@@ -59,7 +59,11 @@ class ProductModel extends Model
      * Обновить данные продукта.
      *
      * @param int $id
-     * @param string $title
+     * @param string $name
+     * @param int $barcode
+     * @param float $price
+     * @param int $discount
+     * @param int $markup
      *
      * @return NurkassaRequest
      */
