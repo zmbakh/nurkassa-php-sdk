@@ -2,7 +2,6 @@
 
 namespace Nurkassa;
 
-use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\HttpClients\NurkassaHttpClientInterface;
 
 class NurkassaClient

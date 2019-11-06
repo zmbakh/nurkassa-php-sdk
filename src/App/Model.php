@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Nurkassa\App;
 
 use Nurkassa\Http\NurkassaRequest;

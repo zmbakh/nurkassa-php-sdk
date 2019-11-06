@@ -291,10 +291,10 @@ class NurkassaRequest
         return 'POST';
     }
 
-
     /**
      * @param $url
      * @param array $newParams
+     *
      * @return string
      */
     protected function appendParamsToUrl($url, array $newParams = [])
@@ -304,7 +304,7 @@ class NurkassaRequest
         }
 
         if (strpos($url, '?') === false) {
-            return $url . '?' . http_build_query($newParams, null, '&');
+            return $url.'?'.http_build_query($newParams, null, '&');
         }
 
         list($path, $query) = explode('?', $url, 2);
@@ -317,6 +317,6 @@ class NurkassaRequest
         // Sort for a predicable order
         ksort($newParams);
 
-        return $path . '?' . http_build_query($newParams, null, '&');
+        return $path.'?'.http_build_query($newParams, null, '&');
     }
 }
