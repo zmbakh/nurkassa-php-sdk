@@ -95,6 +95,7 @@ class NurkassaResponse
         if ($this->body === null) {
             return [];
         }
+
         return $this->body;
     }
 

@@ -23,6 +23,7 @@ class DeviceModel extends Model
     {
         $data = compact('uuid', 'model', 'platform', 'version', 'push_token');
         $this->last_request = new NurkassaRequest('post', '/user/devices', $data);
+
         return $this->last_request;
     }
 }

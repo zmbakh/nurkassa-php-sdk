@@ -16,6 +16,7 @@ class SaleSectionModel extends Model
     public function index(): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', '/sections');
+
         return $this->last_request;
     }
 }
