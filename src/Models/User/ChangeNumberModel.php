@@ -12,6 +12,7 @@ class ChangeNumberModel extends Model
      * Первый шаг смены номер. Отправка СМС.
      *
      * @param $phoneNumber
+     *
      * @return NurkassaRequest
      */
     public function sendSMS($phoneNumber): NurkassaRequest
@@ -19,6 +20,7 @@ class ChangeNumberModel extends Model
         $data['phone_number'] = $phoneNumber;
 
         $this->last_request = new NurkassaRequest('post', 'change-number/send-sms', $data);
+
         return $this->last_request;
     }
 
@@ -37,6 +39,7 @@ class ChangeNumberModel extends Model
         $data['sms_code'] = $smsCode;
 
         $this->last_request = new NurkassaRequest('post', 'change-number/confirm-sms', $data);
+
         return $this->last_request;
     }
 }

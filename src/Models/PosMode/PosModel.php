@@ -18,6 +18,7 @@ class PosModel extends Model
     public function show(int $posID): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', 'pos/'.$posID.'/show', null, ['Pos-Id' => $posID]);
+
         return $this->last_request;
     }
 
@@ -27,11 +28,13 @@ class PosModel extends Model
      *
      * @param int $posID
      * @param int $saleID
+     *
      * @return NurkassaRequest
      */
     public function sale(int $posID, int $saleID): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', 'pos/'.$saleID.'/sale', null, ['Pos-Id' => $posID]);
+
         return $this->last_request;
     }
 
@@ -47,6 +50,7 @@ class PosModel extends Model
     public function sales(int $posID, int $page = 1): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', 'pos/sales', compact('page'), ['Pos-Id' => $posID]);
+
         return $this->last_request;
     }
 
@@ -61,6 +65,7 @@ class PosModel extends Model
     public function report(int $posID): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', 'pos/report', null, ['Pos-Id' => $posID]);
+
         return $this->last_request;
     }
 
@@ -68,10 +73,10 @@ class PosModel extends Model
      * Cash deposit or withdrawal.
      * Внесение либо изъятие денежных средств.
      *
-     * @param int $posID
-     * @param float $sum
+     * @param int    $posID
+     * @param float  $sum
      * @param string $date
-     * @param int $type
+     * @param int    $type
      *
      * @return NurkassaRequest
      */
@@ -79,6 +84,7 @@ class PosModel extends Model
     {
         $data = compact('sum', 'date', 'type');
         $this->last_request = new NurkassaRequest('post', 'money/placement', $data, ['Pos-Id' => $posID]);
+
         return $this->last_request;
     }
 
@@ -86,8 +92,8 @@ class PosModel extends Model
      * Handle sale operation.
      * Выполнить операцию продажи/покупки/возврат.
      *
-     * @param int $posID
-     * @param int $status
+     * @param int   $posID
+     * @param int   $status
      * @param array $goods
      * @param array $payment
      *
@@ -97,6 +103,7 @@ class PosModel extends Model
     {
         $data = compact('status', 'goods', 'payment');
         $this->last_request = new NurkassaRequest('post', 'sale', $data, ['Pos-Id' => $posID]);
+
         return $this->last_request;
     }
 }

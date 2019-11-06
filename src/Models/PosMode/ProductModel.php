@@ -18,6 +18,7 @@ class ProductModel extends Model
     public function search(string $searchKeyword): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', '/products', ['q' => $searchKeyword]);
+
         return $this->last_request;
     }
 }

@@ -18,6 +18,7 @@ class Pos extends Model
     public function getPurchaseMode($id): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', 'pos/'.$id.'/purchase-mode');
+
         return $this->last_request;
     }
 }

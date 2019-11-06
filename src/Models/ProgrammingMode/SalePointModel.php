@@ -16,6 +16,7 @@ class SalePointModel extends Model
     public function index(): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', '/company/sale-points');
+
         return $this->last_request;
     }
 
@@ -30,6 +31,7 @@ class SalePointModel extends Model
     public function show(int $id): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', '/company/sale-points/'.$id);
+
         return $this->last_request;
     }
 
@@ -44,6 +46,7 @@ class SalePointModel extends Model
     public function store(string $title): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('post', '/company/sale-points', compact('title'));
+
         return $this->last_request;
     }
 
@@ -51,7 +54,7 @@ class SalePointModel extends Model
      * Update info of the sale point.
      * Обновить данные точки продаж.
      *
-     * @param int $id
+     * @param int    $id
      * @param string $title
      *
      * @return NurkassaRequest
@@ -59,6 +62,7 @@ class SalePointModel extends Model
     public function update(int $id, string $title): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('put', '/company/sale-points/'.$id, compact('title'));
+
         return $this->last_request;
     }
 
@@ -73,6 +77,7 @@ class SalePointModel extends Model
     public function delete(int $id)
     {
         $this->last_request = new NurkassaRequest('delete', '/company/sale-points/'.$id);
+
         return $this->last_request;
     }
 }
