@@ -50,8 +50,9 @@ class Pos extends Model
      * @param int   $id
      * @param array $attributes Associative array of data. See API documentation for more info
      *                          Editable params by the time of writing the SDK:
-     *                          'name', 'address', 'time_zone', 'purchase_mode', 'is_auto_close', 'auto_close_time', 'email', 'kkm_id',
-     *                          'registration_number', 'is_withdraw_money', 'sale_point_id', 'advert'.
+     *                          'name', 'address', 'time_zone', 'purchase_mode', 'is_auto_close', 'auto_close_time',
+     *                          'email', 'kkm_id', 'registration_number', 'is_withdraw_money', 'sale_point_id',
+     *                          'advert'.
      *
      * @return NurkassaRequest
      */

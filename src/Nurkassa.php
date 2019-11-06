@@ -2,6 +2,7 @@
 
 namespace Nurkassa;
 
+use Nurkassa\Authentication\AuthenticationService;
 use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\Http\NurkassaResponse;
 use Nurkassa\HttpClients\HttpClientFactory;
@@ -75,5 +76,22 @@ class Nurkassa
         $this->access_token = $access_token;
 
         return $this;
+    }
+
+    /**
+     * @param string $phoneNumber
+     * @param string $password
+     * @throws \Exception
+     */
+    public function authenticate(string $phoneNumber, string $password)
+    {
+        $response = $this->handleRequest(AuthenticationService::request($phoneNumber, $password));
+        $errors = AuthenticationService::checkForErrors($response);
+
+        if ($errors === null) {
+            $this->access_token = AuthenticationService::getAccessToken($response);
+        } else {
+            throw new \Exception('Can\'t authenticate. The status code of the response: '.$response->getStatusCode());
+        }
     }
 }

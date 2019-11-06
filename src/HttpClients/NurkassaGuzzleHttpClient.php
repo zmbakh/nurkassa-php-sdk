@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Ring\Exception\RingException;
+use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\Http\NurkassaResponse;
 
 class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
@@ -26,96 +27,37 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
     }
 
     /**
-     * Send a get request to the Nurkassa server
-     * and return the response.
-     *
-     * @param $url
-     * @param $headers
-     *
-     * @return mixed
-     */
-    public function get(string $url, array $headers = [])
-    {
-    }
-
-    /**
-     * Send a post request.
-     *
-     * @param $url
-     * @param $body
-     * @param $headers
-     * @param bool $multipart
-     *
-     * @return mixed
-     */
-    public function post(string $url, array $body, array $headers = [], bool $multipart = false)
-    {
-    }
-
-    /**
-     * Send a put request.
-     *
-     * @param string $url
-     * @param array  $body
-     * @param array  $headers
-     * @param bool   $multipart
-     *
-     * @return mixed
-     */
-    public function put(string $url, array $body, array $headers = [], bool $multipart = false)
-    {
-    }
-
-    /**
-     * Send a delete request.
-     *
-     * @param string $url
-     * @param array  $headers
-     *
-     * @return mixed
-     */
-    public function delete(string $url, array $headers = [])
-    {
-    }
-
-    /**
-     * @param $url
-     * @param $method
-     * @param array $body
-     * @param array $headers
-     * @param int   $timeOut
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     *
+     * @param NurkassaRequest $request
      * @return NurkassaResponse
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function request($url, $method, array $body, array $headers, int $timeOut)
+    public function send(NurkassaRequest $request)
     {
         $options = [
-            'headers'         => $headers,
-            'body'            => $body,
-            'timeout'         => $timeOut,
+            'headers'         => $request->getHeaders(),
+            'body'            => $request->getBody(),
+            'timeout'         => $request->getTimeout(),
             'connect_timeout' => 10,
             //'verify' => __DIR__ . '/certs/RootCA.pem',
         ];
 
-        $request = $this->client->createRequest($method, $url, $options);
+        $request = $this->client->createRequest($request->getMethod(), $request->getUrl(), $options);
 
         try {
-            $rawResponse = $this->client->send($request);
+            $response = $this->client->send($request);
         } catch (RequestException $e) {
-            $rawResponse = $e->getResponse();
+            $response = $e->getResponse();
 
-            if ($e->getPrevious() instanceof RingException || !$rawResponse instanceof ResponseInterface) {
+            if ($e->getPrevious() instanceof RingException || !$response instanceof ResponseInterface) {
                 throw new \Exception($e->getMessage(), $e->getCode());
             }
         }
 
-        $rawHeaders = $this->getHeadersAsString($rawResponse);
-        $rawBody = $rawResponse->getBody();
-        $httpStatusCode = $rawResponse->getStatusCode();
+        $headers = $this->getHeadersAsString($response);
+        $body = $response->getBody();
+        $httpStatusCode = $response->getStatusCode();
 
-        return new NurkassaResponse($rawHeaders, $rawBody, $httpStatusCode);
+        return new NurkassaResponse($headers, $body, $httpStatusCode);
     }
 
     /**
