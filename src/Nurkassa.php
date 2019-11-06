@@ -95,4 +95,12 @@ class Nurkassa
             throw new \Exception('Can\'t authenticate. The status code of the response: '.$response->getStatusCode());
         }
     }
+
+    /**
+     * Removes access token. So you can send unauthenticated requests to the server.
+     */
+    public function logout()
+    {
+        $this->access_token = null;
+    }
 }

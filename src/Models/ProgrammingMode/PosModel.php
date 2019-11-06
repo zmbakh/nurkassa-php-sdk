@@ -5,7 +5,7 @@ namespace Nurkassa\Models\ProgrammingMode;
 use Nurkassa\App\Model;
 use Nurkassa\Http\NurkassaRequest;
 
-class Pos extends Model
+class PosModel extends Model
 {
     /**
      * Get the POSes of the user's company.
