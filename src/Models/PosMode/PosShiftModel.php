@@ -12,7 +12,6 @@ class PosShiftModel extends Model
      * Показать информацию о смене.
      *
      * @param int $posID
-     *
      * @param int $shiftID
      *
      * @return NurkassaRequest
@@ -20,6 +19,7 @@ class PosShiftModel extends Model
     public function show(int $posID, int $shiftID): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', 'pos/shift/'.$shiftID, null, ['Pos-Id' => $posID]);
+
         return $this->last_request;
     }
 
@@ -34,6 +34,7 @@ class PosShiftModel extends Model
     public function close(int $posID): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('post', 'close/shift', null, ['Pos-Id' => $posID]);
+
         return $this->last_request;
     }
 }

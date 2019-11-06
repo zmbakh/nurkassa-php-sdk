@@ -18,6 +18,7 @@ class SaleModel extends Model
     public function show(int $id): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', '/company/sales/'.$id);
+
         return $this->last_request;
     }
 }

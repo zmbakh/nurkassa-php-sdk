@@ -16,6 +16,7 @@ class UserModel extends Model
     public function profile(): NurkassaRequest
     {
         $this->last_request = new NurkassaRequest('get', '/user');
+
         return $this->last_request;
     }
 }
