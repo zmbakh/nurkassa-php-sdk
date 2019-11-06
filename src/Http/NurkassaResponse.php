@@ -92,6 +92,9 @@ class NurkassaResponse
      */
     public function getBody(): array
     {
+        if ($this->body === null) {
+            return [];
+        }
         return $this->body;
     }
 

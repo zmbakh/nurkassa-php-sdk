@@ -46,7 +46,7 @@ class CashierModel extends Model
     }
 
     /**
-     * Update the cashier's info
+     * Update the cashier's info.
      * Обновить данные кассира.
      *
      * @param int   $id
