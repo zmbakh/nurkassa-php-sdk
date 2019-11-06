@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nurkassa\Authentication;
-
 
 use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\Http\NurkassaResponse;
@@ -10,10 +8,11 @@ use Nurkassa\Http\NurkassaResponse;
 class AuthenticationService
 {
     /**
-     * Generates a request to send
+     * Generates a request to send.
      *
      * @param string $phoneNumber
      * @param string $password
+     *
      * @return NurkassaRequest
      */
     public static function request(string $phoneNumber, string $password): NurkassaRequest
@@ -22,9 +21,10 @@ class AuthenticationService
     }
 
     /**
-     * Get access token from the response
+     * Get access token from the response.
      *
      * @param NurkassaResponse $response
+     *
      * @return string|null
      */
     public static function getAccessToken(NurkassaResponse $response)
@@ -34,15 +34,13 @@ class AuthenticationService
         if (isset($body['data']['api_token'])) {
             return $body['data']['api_token'] ?: null;
         }
-
-        return null;
     }
 
-
     /**
-     * Checks for errors in the response
+     * Checks for errors in the response.
      *
      * @param NurkassaResponse $response
+     *
      * @return array|null
      */
     public static function checkForErrors(NurkassaResponse $response)
@@ -58,7 +56,5 @@ class AuthenticationService
 
             return $data;
         }
-
-        return null;
     }
 }

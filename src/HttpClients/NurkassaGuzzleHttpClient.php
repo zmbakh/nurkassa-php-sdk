@@ -28,8 +28,10 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
 
     /**
      * @param NurkassaRequest $request
-     * @return NurkassaResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @return NurkassaResponse
      */
     public function send(NurkassaRequest $request)
     {
