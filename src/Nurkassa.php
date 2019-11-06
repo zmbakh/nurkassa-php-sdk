@@ -81,6 +81,7 @@ class Nurkassa
     /**
      * @param string $phoneNumber
      * @param string $password
+     *
      * @throws \Exception
      */
     public function authenticate(string $phoneNumber, string $password)
