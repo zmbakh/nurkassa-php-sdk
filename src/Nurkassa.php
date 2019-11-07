@@ -12,7 +12,7 @@ class Nurkassa
     /**
      * @const string The base API URL
      */
-    const BASE_API_URL = 'http://nurkassa.kz/api/v1/';
+    const BASE_API_URL = 'https://nurkassa.kz/api/v1/';
 
     /**
      * @const string Current SDK version
