@@ -22,7 +22,7 @@ Simple GET example of a list of the POSes.
 require_once __DIR__ . '/vendor/autoload.php'; // change path as needed
 
 $nurkassa = new Nurkassa\Nurkassa();
-$nurkassa->setAccessToken('h2rOjGoWhofLZHLO9K0xW3h8Pyfml7RG7ikLXSemHNhmaSgBrgDXNu5NMNs6');
+$nurkassa->setAccessToken('h2rOjGoWhofLZHLO9K0xW3h8Pyfml7RG7ikLXSemHNhmaSgBrgDXNu5NMNs6'); //Example token.
 
 $pos = new \Nurkassa\Models\ProgrammingMode\PosModel();
 $request = $pos->index();
