@@ -1,6 +1,6 @@
 {
     "name": "zmbakh/nurkassa-php-sdk",
-    "description": "A php SDK for working with the API of Nurkassa. Created by the owner company.",
+    "description": "A PHP SDK for working with the API of Nurkassa. Created by the owner company.",
     "keywords": ["php", "sdk", "nurkassa"],
     "type": "library",
     "license": "proprietary",

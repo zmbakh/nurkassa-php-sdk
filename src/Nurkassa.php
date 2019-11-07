@@ -59,7 +59,7 @@ class Nurkassa
         }
 
         $this->client = new NurkassaClient(
-            HttpClientFactory::createHttpClient($config['http_client_handler'])
+            HttpClientFactory::createHttpClient($config['http_client_handler'] ?: null)
         );
     }
 
