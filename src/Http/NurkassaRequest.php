@@ -5,7 +5,6 @@ namespace Nurkassa\Http;
 use Nurkassa\Http\Body\RequestBodyMultipart;
 use Nurkassa\Http\Body\RequestBodyUrlEncoded;
 use Nurkassa\Nurkassa;
-use Nurkassa\NurkassaClient;
 
 class NurkassaRequest
 {
