@@ -10,6 +10,11 @@ use Nurkassa\HttpClients\HttpClientFactory;
 class Nurkassa
 {
     /**
+     * @const string The base API URL
+     */
+    const BASE_API_URL = 'http://nurkassa.kz/api/v1/';
+
+    /**
      * @const string Current SDK version
      */
     const CURRENT_SDK_VERSION = 'v1.0.0';
@@ -25,6 +30,13 @@ class Nurkassa
     protected $client;
 
     /**
+     * @var
+     */
+    protected $baseApiUrl;
+
+
+
+    /**
      * Nurkassa constructor.
      *
      * @param array $config
@@ -35,9 +47,16 @@ class Nurkassa
     {
         $config = array_merge([
             'access_token' => null,
+            'base_url' => self::BASE_API_URL,
         ], $config);
 
         $this->access_token = $config['access_token'];
+
+        $this->baseApiUrl = $config['base_url'];
+
+        if (mb_substr($this->baseApiUrl, -1) !== '/') {
+            $this->baseApiUrl .= '/';
+        }
 
         $this->client = new NurkassaClient(
             HttpClientFactory::createHttpClient($config['http_client_handler'])
@@ -63,7 +82,29 @@ class Nurkassa
             $request->addHeaders(['Authorization' => 'Bearer '.$this->access_token]);
         }
 
+        $validUrl = $this->makeValidUrl($request->getUrl());
+
+        $request->setUrl($validUrl);
+
         return $this->client->getHttpClient()->send($request);
+    }
+
+    /**
+     * @param $url
+     *
+     * @return string
+     */
+    protected function makeValidUrl($url)
+    {
+        if (strtolower(substr($url, 0, 4)) !== 'http') {
+            if ($url[0] === '/') {
+                $url = mb_substr($url, 1);
+            }
+
+            $url = $this->baseApiUrl.$url;
+        }
+
+        return $url;
     }
 
     /**
@@ -102,5 +143,15 @@ class Nurkassa
     public function logout()
     {
         $this->access_token = null;
+    }
+
+    /**
+     * @param mixed $baseApiUrl
+     * @return Nurkassa
+     */
+    public function setBaseApiUrl($baseApiUrl)
+    {
+        $this->baseApiUrl = $baseApiUrl;
+        return $this;
     }
 }

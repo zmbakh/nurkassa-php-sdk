@@ -58,7 +58,7 @@ class NurkassaRequest
         $this->prepareCommonHeaders();
 
         $this->method = strtoupper($method);
-        $this->url = $this->makeValidUrl($url);
+        $this->url = $url;
 
         if ($body) {
             $this->params = $body;
@@ -99,27 +99,9 @@ class NurkassaRequest
      */
     public function setUrl(string $url): self
     {
-        $this->url = $this->makeValidUrl($url);
+        $this->url = $url;
 
         return $this;
-    }
-
-    /**
-     * @param $url
-     *
-     * @return string
-     */
-    protected function makeValidUrl($url)
-    {
-        if (strtolower(substr($url, 0, 4)) !== 'http') {
-            if ($url[0] === '/') {
-                $url = mb_substr($url, 1);
-            }
-
-            $url = NurkassaClient::BASE_API_URL.$url;
-        }
-
-        return $url;
     }
 
     /**

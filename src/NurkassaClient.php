@@ -7,17 +7,6 @@ use Nurkassa\HttpClients\NurkassaHttpClientInterface;
 class NurkassaClient
 {
     /**
-     * @const string The base API URL
-     */
-    //Todo change to production URL before publish
-    const BASE_API_URL = 'http://nurkassa.web/api/v1/';
-
-    /**
-     * @const string The root URL of the website
-     */
-    const BASE_ROOT_URL = 'https://nurkassa.kz/';
-
-    /**
      * @var NurkassaHttpClientInterface
      */
     protected $httpClient;
