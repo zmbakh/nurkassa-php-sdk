@@ -3,7 +3,7 @@
     "description": "A php SDK for working with the API of Nurkassa. Created by the owner company.",
     "keywords": ["php", "sdk", "nurkassa"],
     "type": "library",
-    "license": "Nurkassa",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Zanggar Muratkhan",
