@@ -79,8 +79,18 @@ class NurkassaRequest
      */
     protected function prepareCommonHeaders()
     {
-        $protocol = $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
-        $hostName = $_SERVER['HTTP_HOST'];
+        if (isset($_SERVER['HTTPS'])) {
+            $protocol = $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+        } else {
+            $protocol = null;
+        }
+
+        if (isset($_SERVER['HTTPS'])) {
+            $hostName = $_SERVER['HTTP_HOST'];
+        } else {
+            $hostName = null;
+        }
+
         $url = $protocol.$hostName;
 
         $this->headers = [
