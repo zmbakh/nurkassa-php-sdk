@@ -34,8 +34,6 @@ class Nurkassa
      */
     protected $baseApiUrl;
 
-
-
     /**
      * Nurkassa constructor.
      *
@@ -47,7 +45,7 @@ class Nurkassa
     {
         $config = array_merge([
             'access_token' => null,
-            'base_url' => self::BASE_API_URL,
+            'base_url'     => self::BASE_API_URL,
         ], $config);
 
         $this->access_token = $config['access_token'];
@@ -147,11 +145,13 @@ class Nurkassa
 
     /**
      * @param mixed $baseApiUrl
+     *
      * @return Nurkassa
      */
     public function setBaseApiUrl($baseApiUrl)
     {
         $this->baseApiUrl = $baseApiUrl;
+
         return $this;
     }
 }
