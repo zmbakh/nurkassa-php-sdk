@@ -4,8 +4,7 @@ namespace Nurkassa\HttpClients;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Message\ResponseInterface;
-use GuzzleHttp\Ring\Exception\RingException;
+use GuzzleHttp\Psr7;
 use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\Http\NurkassaResponse;
 
@@ -43,20 +42,21 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
             //'verify' => __DIR__ . '/certs/RootCA.pem',
         ];
 
-        $request = $this->client->createRequest($request->getMethod(), $request->getUrl(), $options);
-
         try {
-            $response = $this->client->send($request);
+            $response = $this->client->request($request->getMethod(), $request->getUrl(), $options);
         } catch (RequestException $e) {
-            $response = $e->getResponse();
-
-            if ($e->getPrevious() instanceof RingException || !$response instanceof ResponseInterface) {
-                throw new \Exception($e->getMessage(), $e->getCode());
+            if ($e->hasResponse()) {
+                $response = $e->getResponse();
+            } else {
+                throw new \Exception('Error');
             }
         }
 
         $headers = $this->getHeadersAsString($response);
-        $body = $response->getBody();
+        $body = (string) $response->getBody();
+
+        $body = json_decode($body, true);
+
         $httpStatusCode = $response->getStatusCode();
 
         return new NurkassaResponse($headers, $body, $httpStatusCode);
@@ -65,11 +65,11 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
     /**
      * Returns the Guzzle array of headers as a string.
      *
-     * @param ResponseInterface $response The Guzzle response.
+     * @param Psr7\Response $response The Guzzle response.
      *
      * @return string
      */
-    public function getHeadersAsString(ResponseInterface $response)
+    public function getHeadersAsString(Psr7\Response $response)
     {
         $headers = $response->getHeaders();
         $rawHeaders = [];
