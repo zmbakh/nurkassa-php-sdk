@@ -2,6 +2,7 @@
 
 namespace Nurkassa;
 
+use Exception;
 use Nurkassa\Authentication\AuthenticationService;
 use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\Http\NurkassaResponse;
@@ -17,7 +18,7 @@ class Nurkassa
     /**
      * @const string Current SDK version
      */
-    const CURRENT_SDK_VERSION = '1.0.0';
+    const CURRENT_SDK_VERSION = '1.0.1';
 
     /**
      * @var string Access token
@@ -131,7 +132,7 @@ class Nurkassa
         if ($errors === null) {
             $this->access_token = AuthenticationService::getAccessToken($response);
         } else {
-            throw new \Exception('Can\'t authenticate. The status code of the response: '.$response->getStatusCode());
+            throw new Exception('Can\'t authenticate. The status code of the response: '.$response->getStatusCode());
         }
     }
 
