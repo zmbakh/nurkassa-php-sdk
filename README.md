@@ -1,6 +1,6 @@
 # Nurkassa SDK for PHP v1
 
-[![Latest Stable Version](http://img.shields.io/badge/Latest%20Stable-1.0.0-blue.svg)](https://packagist.org/packages/zmbakh/nurkassa-php-sdk)
+[![Latest Stable Version](http://img.shields.io/badge/Latest%20Stable-1.0.1-blue.svg)](https://packagist.org/packages/zmbakh/nurkassa-php-sdk)
 
 ## Installation
 
