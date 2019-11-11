@@ -2,7 +2,6 @@
 
 namespace Nurkassa;
 
-use Exception;
 use Nurkassa\Authentication\AuthenticationService;
 use Nurkassa\Exceptions\CouldNotAuthenticateException;
 use Nurkassa\Http\NurkassaRequest;
