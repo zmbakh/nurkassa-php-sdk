@@ -3,8 +3,10 @@
 namespace Nurkassa\HttpClients;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7;
+use Nurkassa\Exceptions\CouldNotConnectException;
 use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\Http\NurkassaResponse;
 
@@ -28,7 +30,8 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
     /**
      * @param NurkassaRequest $request
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws CouldNotConnectException
+     * @throws GuzzleException
      *
      * @return NurkassaResponse
      */
@@ -48,7 +51,7 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
             if ($e->hasResponse()) {
                 $response = $e->getResponse();
             } else {
-                throw new \Exception('Error');
+                throw new CouldNotConnectException($e->getMessage());
             }
         }
 

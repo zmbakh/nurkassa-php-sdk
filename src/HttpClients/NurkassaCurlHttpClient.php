@@ -2,6 +2,8 @@
 
 namespace Nurkassa\HttpClients;
 
+use Exception;
+use Nurkassa\Exceptions\CouldNotConnectException;
 use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\Http\NurkassaResponse;
 
@@ -38,7 +40,11 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
         $this->executeRequest();
 
         if ($curlErrorCode = $this->curlService->errno()) {
-            throw new \Exception($this->curlService->error(), $curlErrorCode);
+            if ($this->curlService->errno() == 6) {
+                throw new CouldNotConnectException($this->curlService->error());
+            }
+
+            throw new Exception($this->curlService->error(), $curlErrorCode);
         }
 
         list($headers, $body) = $this->getHeadersAndBody();

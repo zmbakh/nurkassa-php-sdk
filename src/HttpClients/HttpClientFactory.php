@@ -5,6 +5,8 @@ namespace Nurkassa\HttpClients;
 use Exception;
 use GuzzleHttp\Client;
 use InvalidArgumentException;
+use Nurkassa\Exceptions\CurlDoesntExistException;
+use Nurkassa\Exceptions\GuzzleDoesntExistException;
 
 class HttpClientFactory
 {
@@ -43,7 +45,7 @@ class HttpClientFactory
     {
         if ('curl' === $client) {
             if (!extension_loaded('curl')) {
-                throw new Exception('The cURL extension must be loaded in order to use the "curl" handler.');
+                throw new CurlDoesntExistException('The cURL extension must be loaded in order to use the "curl" handler.');
             }
 
             return new NurkassaCurlHttpClient();
@@ -51,7 +53,7 @@ class HttpClientFactory
 
         if ('guzzle' === $client) {
             if (!class_exists('GuzzleHttp\Client')) {
-                throw new Exception('The Guzzle HTTP client must be included in order to use the "guzzle" handler.');
+                throw new GuzzleDoesntExistException('The Guzzle HTTP client must be included in order to use the "guzzle" handler.');
             }
 
             return new NurkassaGuzzleHttpClient();
