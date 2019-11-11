@@ -122,7 +122,8 @@ class Nurkassa
      * @param string $phoneNumber
      * @param string $password
      *
-     * @throws \Exception
+     * @return NurkassaResponse
+     * @throws CouldNotAuthenticateException
      */
     public function authenticate(string $phoneNumber, string $password)
     {
@@ -131,6 +132,7 @@ class Nurkassa
 
         if ($errors === null) {
             $this->access_token = AuthenticationService::getAccessToken($response);
+            return $response;
         } else {
             throw new CouldNotAuthenticateException('Can\'t authenticate. The status code of the response: '.$response->getStatusCode());
         }
