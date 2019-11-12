@@ -14,6 +14,11 @@ class NurkassaRequest
     protected $url;
 
     /**
+     * @var int $version Version of the endpoint
+     */
+    protected $version = 1;
+
+    /**
      * @var string
      */
     protected $method;
@@ -34,7 +39,7 @@ class NurkassaRequest
     protected $params = [];
 
     /**
-     * @var array body of the request
+     * @var RequestBodyMultipart|RequestBodyUrlEncoded body of the request
      */
     protected $body;
 
@@ -309,5 +314,23 @@ class NurkassaRequest
         ksort($newParams);
 
         return $path.'?'.http_build_query($newParams, null, '&');
+    }
+
+    /**
+     * @param int $version
+     * @return NurkassaRequest
+     */
+    public function setVersion(int $version): NurkassaRequest
+    {
+        $this->version = $version;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVersion(): int
+    {
+        return $this->version;
     }
 }

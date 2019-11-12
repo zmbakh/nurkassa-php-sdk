@@ -13,12 +13,12 @@ class Nurkassa
     /**
      * @const string The base API URL
      */
-    const BASE_API_URL = 'https://nurkassa.kz/api/v1/';
+    const BASE_URL = 'https://nurkassa.kz/';
 
     /**
      * @const string Current SDK version
      */
-    const CURRENT_SDK_VERSION = '1.0.2';
+    const CURRENT_SDK_VERSION = '1.1.0';
 
     /**
      * @var string Access token
@@ -33,7 +33,7 @@ class Nurkassa
     /**
      * @var
      */
-    protected $baseApiUrl;
+    protected $baseUrl;
 
     /**
      * Nurkassa constructor.
@@ -46,15 +46,15 @@ class Nurkassa
     {
         $config = array_merge([
             'access_token' => null,
-            'base_url'     => self::BASE_API_URL,
+            'base_url'     => self::BASE_URL,
         ], $config);
 
         $this->access_token = $config['access_token'];
 
-        $this->baseApiUrl = $config['base_url'];
+        $this->baseUrl = $config['base_url'];
 
-        if (mb_substr($this->baseApiUrl, -1) !== '/') {
-            $this->baseApiUrl .= '/';
+        if (mb_substr($this->baseUrl, -1) !== '/') {
+            $this->baseUrl .= '/';
         }
 
         $this->client = new NurkassaClient(
@@ -81,7 +81,7 @@ class Nurkassa
             $request->addHeaders(['Authorization' => 'Bearer '.$this->access_token]);
         }
 
-        $validUrl = $this->makeValidUrl($request->getUrl());
+        $validUrl = $this->makeValidUrl($request->getUrl(), $request->getVersion());
 
         $request->setUrl($validUrl);
 
@@ -90,17 +90,18 @@ class Nurkassa
 
     /**
      * @param $url
+     * @param int $version
      *
      * @return string
      */
-    protected function makeValidUrl($url)
+    protected function makeValidUrl($url, int $version = 1)
     {
         if (strtolower(substr($url, 0, 4)) !== 'http') {
             if ($url[0] === '/') {
                 $url = mb_substr($url, 1);
             }
 
-            $url = $this->baseApiUrl.$url;
+            $url = $this->baseUrl.'api/v'.$version.'/'.$url;
         }
 
         return $url;
@@ -147,13 +148,13 @@ class Nurkassa
     }
 
     /**
-     * @param mixed $baseApiUrl
+     * @param mixed $baseUrl
      *
      * @return Nurkassa
      */
-    public function setBaseApiUrl($baseApiUrl)
+    public function setBaseUrl($baseUrl)
     {
-        $this->baseApiUrl = $baseApiUrl;
+        $this->baseUrl = $baseUrl;
 
         return $this;
     }

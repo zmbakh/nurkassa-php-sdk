@@ -102,7 +102,11 @@ class PosModel extends Model
     public function handleSale(int $posID, int $status, array $goods, array $payment): NurkassaRequest
     {
         $data = compact('status', 'goods', 'payment');
-        $this->last_request = new NurkassaRequest('post', 'sale', $data, ['Pos-Id' => $posID]);
+
+        $request = new NurkassaRequest('post', 'sale', $data, ['Pos-Id' => $posID]);
+        $request->setVersion(2);
+
+        $this->last_request = $request;
 
         return $this->last_request;
     }
