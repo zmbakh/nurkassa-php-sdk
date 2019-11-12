@@ -14,7 +14,7 @@ class NurkassaRequest
     protected $url;
 
     /**
-     * @var int $version Version of the endpoint
+     * @var int Version of the endpoint
      */
     protected $version = 1;
 
@@ -318,11 +318,13 @@ class NurkassaRequest
 
     /**
      * @param int $version
+     *
      * @return NurkassaRequest
      */
-    public function setVersion(int $version): NurkassaRequest
+    public function setVersion(int $version): self
     {
         $this->version = $version;
+
         return $this;
     }
 
