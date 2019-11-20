@@ -5,7 +5,7 @@ namespace Nurkassa\Models\Pos;
 use Nurkassa\App\Model;
 use Nurkassa\Http\NurkassaRequest;
 
-class Pos extends Model
+class PosModel extends Model
 {
     /**
      * Display if purchase mode of the POS is on.
