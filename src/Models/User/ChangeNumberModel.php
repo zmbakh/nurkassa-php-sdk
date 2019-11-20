@@ -19,9 +19,9 @@ class ChangeNumberModel extends Model
     {
         $data['phone_number'] = $phoneNumber;
 
-        $this->last_request = new NurkassaRequest('post', 'change-number/send-sms', $data);
+        $this->lastRequest = new NurkassaRequest('post', 'change-number/send-sms', $data);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -38,8 +38,8 @@ class ChangeNumberModel extends Model
         $data['phone_number'] = $phoneNumber;
         $data['sms_code'] = $smsCode;
 
-        $this->last_request = new NurkassaRequest('post', 'change-number/confirm-sms', $data);
+        $this->lastRequest = new NurkassaRequest('post', 'change-number/confirm-sms', $data);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7;
 use Nurkassa\Exceptions\CouldNotConnectException;
+use Nurkassa\Exceptions\ResponseWithErrorException;
 use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\Http\NurkassaResponse;
 
@@ -32,6 +33,7 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
      *
      * @throws CouldNotConnectException
      * @throws GuzzleException
+     * @throws ResponseWithErrorException
      *
      * @return NurkassaResponse
      */
@@ -49,7 +51,10 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
             $response = $this->client->request($request->getMethod(), $request->getUrl(), $options);
         } catch (RequestException $e) {
             if ($e->hasResponse()) {
-                $response = $e->getResponse();
+                $errorResponse = $e->getResponse();
+                $body = json_decode((string) $errorResponse->getBody(), true);
+                $body = $body['error'] ?? [];
+                throw new ResponseWithErrorException($body['message'] ?? '', $errorResponse->getStatusCode(), $body['errors']);
             } else {
                 throw new CouldNotConnectException($e->getMessage());
             }

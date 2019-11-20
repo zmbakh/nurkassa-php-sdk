@@ -17,9 +17,9 @@ class ProductModel extends Model
      */
     public function index(int $page = 1): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', '/company/products', compact('page'));
+        $this->lastRequest = new NurkassaRequest('get', '/company/products', compact('page'));
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -32,9 +32,9 @@ class ProductModel extends Model
      */
     public function show(int $id): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', '/company/products/'.$id);
+        $this->lastRequest = new NurkassaRequest('get', '/company/products/'.$id);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -52,9 +52,9 @@ class ProductModel extends Model
     public function store(string $name, int $barcode, float $price, int $discount, int $markup): NurkassaRequest
     {
         $data = compact('name', 'barcode', 'discount', 'markup', 'price');
-        $this->last_request = new NurkassaRequest('post', '/company/products', $data);
+        $this->lastRequest = new NurkassaRequest('post', '/company/products', $data);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -74,9 +74,9 @@ class ProductModel extends Model
     {
         $data = compact('name', 'barcode', 'discount', 'markup', 'price');
 
-        $this->last_request = new NurkassaRequest('put', '/company/products/'.$id, $data);
+        $this->lastRequest = new NurkassaRequest('put', '/company/products/'.$id, $data);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -89,8 +89,8 @@ class ProductModel extends Model
      */
     public function delete(int $id)
     {
-        $this->last_request = new NurkassaRequest('delete', '/company/products/'.$id);
+        $this->lastRequest = new NurkassaRequest('delete', '/company/products/'.$id);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

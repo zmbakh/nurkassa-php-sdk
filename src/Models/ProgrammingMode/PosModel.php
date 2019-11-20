@@ -15,9 +15,9 @@ class PosModel extends Model
      */
     public function index(): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', '/company/pos');
+        $this->lastRequest = new NurkassaRequest('get', '/company/pos');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -38,9 +38,9 @@ class PosModel extends Model
             'time_zone'     => $timeZone,
         ];
 
-        $this->last_request = new NurkassaRequest('post', '/company/pos', $data);
+        $this->lastRequest = new NurkassaRequest('post', '/company/pos', $data);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -58,9 +58,9 @@ class PosModel extends Model
      */
     public function update(int $id, array $attributes): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('put', '/company/pos/'.$id, $attributes);
+        $this->lastRequest = new NurkassaRequest('put', '/company/pos/'.$id, $attributes);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -85,8 +85,8 @@ class PosModel extends Model
             $request->addParams(['date_to' => $dateTo]);
         }
 
-        $this->last_request = $request;
+        $this->lastRequest = $request;
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

@@ -9,14 +9,14 @@ abstract class Model
     /**
      * @var NurkassaRequest the last prepared request
      */
-    protected $last_request;
+    protected $lastRequest;
 
     /**
      * @return NurkassaRequest
      */
     public function __invoke(): NurkassaRequest
     {
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -24,6 +24,6 @@ abstract class Model
      */
     public function getLastRequest(): NurkassaRequest
     {
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

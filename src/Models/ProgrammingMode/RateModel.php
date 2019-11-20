@@ -15,8 +15,8 @@ class RateModel extends Model
      */
     public function index(): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', '/company/rates');
+        $this->lastRequest = new NurkassaRequest('get', '/company/rates');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

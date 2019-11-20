@@ -18,9 +18,9 @@ class PosShiftModel extends Model
      */
     public function show(int $posID, int $shiftID): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', 'pos/shift/'.$shiftID, null, ['Pos-Id' => $posID]);
+        $this->lastRequest = new NurkassaRequest('get', 'pos/shift/'.$shiftID, null, ['Pos-Id' => $posID]);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -33,8 +33,8 @@ class PosShiftModel extends Model
      */
     public function close(int $posID): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('post', 'close/shift', null, ['Pos-Id' => $posID]);
+        $this->lastRequest = new NurkassaRequest('post', 'close/shift', null, ['Pos-Id' => $posID]);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

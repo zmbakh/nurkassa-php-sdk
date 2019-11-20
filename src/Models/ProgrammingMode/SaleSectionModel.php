@@ -15,9 +15,9 @@ class SaleSectionModel extends Model
      */
     public function index(): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', '/company/sale-sections');
+        $this->lastRequest = new NurkassaRequest('get', '/company/sale-sections');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -30,9 +30,9 @@ class SaleSectionModel extends Model
      */
     public function show(int $id): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', '/company/sale-sections/'.$id);
+        $this->lastRequest = new NurkassaRequest('get', '/company/sale-sections/'.$id);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -45,9 +45,9 @@ class SaleSectionModel extends Model
      */
     public function store(string $title): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('post', '/company/sale-sections', compact('title'));
+        $this->lastRequest = new NurkassaRequest('post', '/company/sale-sections', compact('title'));
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -61,9 +61,9 @@ class SaleSectionModel extends Model
      */
     public function update(int $id, string $title): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('put', '/company/sale-sections/'.$id, compact('title'));
+        $this->lastRequest = new NurkassaRequest('put', '/company/sale-sections/'.$id, compact('title'));
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -76,8 +76,8 @@ class SaleSectionModel extends Model
      */
     public function delete(int $id)
     {
-        $this->last_request = new NurkassaRequest('delete', '/company/sale-sections/'.$id);
+        $this->lastRequest = new NurkassaRequest('delete', '/company/sale-sections/'.$id);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

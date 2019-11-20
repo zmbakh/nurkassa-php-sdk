@@ -15,9 +15,9 @@ class LatestVersionModel extends Model
      */
     public function iOS(): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', 'latest-version/ios');
+        $this->lastRequest = new NurkassaRequest('get', 'latest-version/ios');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -28,8 +28,8 @@ class LatestVersionModel extends Model
      */
     public function android(): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', 'latest-version/android');
+        $this->lastRequest = new NurkassaRequest('get', 'latest-version/android');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

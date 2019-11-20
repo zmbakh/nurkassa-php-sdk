@@ -4,6 +4,7 @@ namespace Nurkassa\HttpClients;
 
 use Exception;
 use Nurkassa\Exceptions\CouldNotConnectException;
+use Nurkassa\Exceptions\ResponseWithErrorException;
 use Nurkassa\Http\NurkassaRequest;
 use Nurkassa\Http\NurkassaResponse;
 
@@ -53,7 +54,14 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
 
         $this->closeConnection();
 
-        return new NurkassaResponse($headers, $body);
+        $response = new NurkassaResponse($headers, $body);
+
+        if ($response->getStatusCode() >= 400) {
+            $body = $response->getBody()['error'] ?? [];
+            throw new ResponseWithErrorException($body['message'] ?? '', $response->getStatusCode(), $body['errors']);
+        }
+
+        return $response;
     }
 
     /**

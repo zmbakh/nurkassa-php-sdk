@@ -17,9 +17,9 @@ class PosModel extends Model
      */
     public function show(int $posID): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', 'pos/'.$posID.'/show', null, ['Pos-Id' => $posID]);
+        $this->lastRequest = new NurkassaRequest('get', 'pos/'.$posID.'/show', null, ['Pos-Id' => $posID]);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -33,9 +33,9 @@ class PosModel extends Model
      */
     public function sale(int $posID, int $saleID): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', 'pos/'.$saleID.'/sale', null, ['Pos-Id' => $posID]);
+        $this->lastRequest = new NurkassaRequest('get', 'pos/'.$saleID.'/sale', null, ['Pos-Id' => $posID]);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -49,9 +49,9 @@ class PosModel extends Model
      */
     public function sales(int $posID, int $page = 1): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', 'pos/sales', compact('page'), ['Pos-Id' => $posID]);
+        $this->lastRequest = new NurkassaRequest('get', 'pos/sales', compact('page'), ['Pos-Id' => $posID]);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -64,9 +64,9 @@ class PosModel extends Model
      */
     public function report(int $posID): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', 'pos/report', null, ['Pos-Id' => $posID]);
+        $this->lastRequest = new NurkassaRequest('get', 'pos/report', null, ['Pos-Id' => $posID]);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -83,9 +83,9 @@ class PosModel extends Model
     public function replacement(int $posID, float $sum, string $date, int $type): NurkassaRequest
     {
         $data = compact('sum', 'date', 'type');
-        $this->last_request = new NurkassaRequest('post', 'money/placement', $data, ['Pos-Id' => $posID]);
+        $this->lastRequest = new NurkassaRequest('post', 'money/placement', $data, ['Pos-Id' => $posID]);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -106,8 +106,8 @@ class PosModel extends Model
         $request = new NurkassaRequest('post', 'sale', $data, ['Pos-Id' => $posID]);
         $request->setVersion(2);
 
-        $this->last_request = $request;
+        $this->lastRequest = $request;
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

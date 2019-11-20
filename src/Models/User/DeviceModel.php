@@ -22,8 +22,8 @@ class DeviceModel extends Model
     public function store(string $uuid, string $model, string $platform, string $version, string $push_token): NurkassaRequest
     {
         $data = compact('uuid', 'model', 'platform', 'version', 'push_token');
-        $this->last_request = new NurkassaRequest('post', '/user/devices', $data);
+        $this->lastRequest = new NurkassaRequest('post', '/user/devices', $data);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

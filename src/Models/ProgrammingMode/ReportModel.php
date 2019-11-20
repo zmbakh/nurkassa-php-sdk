@@ -17,9 +17,9 @@ class ReportModel extends Model
      */
     public function ZXReport($posShiftID): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', '/company/pos/shifts/'.$posShiftID.'/zxreport');
+        $this->lastRequest = new NurkassaRequest('get', '/company/pos/shifts/'.$posShiftID.'/zxreport');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -32,9 +32,9 @@ class ReportModel extends Model
      */
     public function cashiers($posShiftID)
     {
-        $this->last_request = new NurkassaRequest('get', '/company/pos/shifts/'.$posShiftID.'/cashiers');
+        $this->lastRequest = new NurkassaRequest('get', '/company/pos/shifts/'.$posShiftID.'/cashiers');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -47,9 +47,9 @@ class ReportModel extends Model
      */
     public function checks($posShiftID)
     {
-        $this->last_request = new NurkassaRequest('get', '/company/pos/shifts/'.$posShiftID.'/checks');
+        $this->lastRequest = new NurkassaRequest('get', '/company/pos/shifts/'.$posShiftID.'/checks');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -62,8 +62,8 @@ class ReportModel extends Model
      */
     public function sections($posShiftID)
     {
-        $this->last_request = new NurkassaRequest('get', '/company/pos/shifts/'.$posShiftID.'/sections');
+        $this->lastRequest = new NurkassaRequest('get', '/company/pos/shifts/'.$posShiftID.'/sections');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

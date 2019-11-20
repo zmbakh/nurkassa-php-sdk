@@ -15,9 +15,9 @@ class CashierModel extends Model
      */
     public function index(): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', '/company/cashiers');
+        $this->lastRequest = new NurkassaRequest('get', '/company/cashiers');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -25,24 +25,24 @@ class CashierModel extends Model
      * Сохранить нового кассира.
      *
      * @param string $name
-     * @param string $phone_number
+     * @param string $phoneNumber
      * @param string $password
      * @param array  $poses
      *
      * @return NurkassaRequest
      */
-    public function store(string $name, string $phone_number, string $password, array $poses): NurkassaRequest
+    public function store(string $name, string $phoneNumber, string $password, array $poses): NurkassaRequest
     {
         $data = [
             'name'         => $name,
-            'phone_number' => $phone_number,
+            'phone_number' => $phoneNumber,
             'password'     => $password,
             'poses'        => $poses,
         ];
 
-        $this->last_request = new NurkassaRequest('post', '/company/cashiers', $data);
+        $this->lastRequest = new NurkassaRequest('post', '/company/cashiers', $data);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -56,9 +56,9 @@ class CashierModel extends Model
      */
     public function update($id, $attributes): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('put', '/company/cashiers/'.$id, $attributes);
+        $this->lastRequest = new NurkassaRequest('put', '/company/cashiers/'.$id, $attributes);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -69,8 +69,8 @@ class CashierModel extends Model
      */
     public function trashed(): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', '/company/cashiers/trashed');
+        $this->lastRequest = new NurkassaRequest('get', '/company/cashiers/trashed');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }

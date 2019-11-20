@@ -15,9 +15,9 @@ class LicenseKeyModel extends Model
      */
     public function index(): NurkassaRequest
     {
-        $this->last_request = new NurkassaRequest('get', '/company/license-keys');
+        $this->lastRequest = new NurkassaRequest('get', '/company/license-keys');
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -32,9 +32,9 @@ class LicenseKeyModel extends Model
     public function activate(int $key_id, int $pos_id): NurkassaRequest
     {
         $data = compact('key_id', 'pos_id');
-        $this->last_request = new NurkassaRequest('post', '/company/license-keys/activate', $data);
+        $this->lastRequest = new NurkassaRequest('post', '/company/license-keys/activate', $data);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 
     /**
@@ -48,8 +48,8 @@ class LicenseKeyModel extends Model
     public function purchase(int $rate_id): NurkassaRequest
     {
         $data = compact('rate_id');
-        $this->last_request = new NurkassaRequest('post', '/company/license-keys/purchase', $data);
+        $this->lastRequest = new NurkassaRequest('post', '/company/license-keys/purchase', $data);
 
-        return $this->last_request;
+        return $this->lastRequest;
     }
 }
