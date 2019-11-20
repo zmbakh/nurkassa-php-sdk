@@ -20,7 +20,7 @@ class ResponseWithErrorException extends Exception
      * @param array          $errors
      * @param Throwable|null $previous
      */
-    public function __construct($message = '', $code = 0, $errors = [], Throwable $previous = null)
+    public function __construct($message = '', $code = 400, $errors = [], Throwable $previous = null)
     {
         $this->errors = $errors;
         parent::__construct($message, $code, $previous);
