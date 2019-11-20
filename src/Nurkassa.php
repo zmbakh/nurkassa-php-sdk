@@ -18,7 +18,7 @@ class Nurkassa
     /**
      * @const string Current SDK version
      */
-    const CURRENT_SDK_VERSION = '1.2.2';
+    const CURRENT_SDK_VERSION = '1.2.3';
 
     /**
      * @var string Access token
@@ -73,6 +73,8 @@ class Nurkassa
     /**
      * @param NurkassaRequest $request
      *
+     * @throws Exceptions\ResponseWithErrorException
+     *
      * @return NurkassaResponse
      */
     public function handleRequest(NurkassaRequest $request): NurkassaResponse
@@ -124,6 +126,7 @@ class Nurkassa
      * @param string $password
      *
      * @throws CouldNotAuthenticateException
+     * @throws Exceptions\ResponseWithErrorException
      *
      * @return NurkassaResponse
      */
