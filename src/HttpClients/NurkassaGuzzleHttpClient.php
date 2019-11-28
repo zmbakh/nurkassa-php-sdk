@@ -55,7 +55,7 @@ class NurkassaGuzzleHttpClient implements NurkassaHttpClientInterface
                 $body = json_decode((string) $errorResponse->getBody(), true);
                 $body = $body['error'] ?? [];
 
-                throw new ResponseWithErrorException($body['message'] ?? '', $errorResponse->getStatusCode(), $body['errors']);
+                throw new ResponseWithErrorException($body['message'] ?? '', $errorResponse->getStatusCode(), $body['errors'] ?? []);
             } else {
                 throw new CouldNotConnectException($e->getMessage());
             }

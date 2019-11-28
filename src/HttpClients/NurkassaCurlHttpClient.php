@@ -59,7 +59,7 @@ class NurkassaCurlHttpClient implements NurkassaHttpClientInterface
         if ($response->getStatusCode() >= 400) {
             $body = $response->getBody()['error'] ?? [];
 
-            throw new ResponseWithErrorException($body['message'] ?? '', $response->getStatusCode(), $body['errors']);
+            throw new ResponseWithErrorException($body['message'] ?? '', $response->getStatusCode(), $body['errors'] ?? []);
         }
 
         return $response;

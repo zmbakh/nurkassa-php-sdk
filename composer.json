@@ -1,32 +1,37 @@
 {
-    "name": "zmbakh/nurkassa-php-sdk",
-    "description": "A PHP SDK for working with the API of Nurkassa. Created by the owner company.",
-    "keywords": ["php", "sdk", "nurkassa"],
-    "type": "library",
-    "license": "proprietary",
-    "authors": [
-        {
-            "name": "Zanggar Muratkhan",
-            "email": "zmbakh@gmail.com",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-		"php": ">=7.1",
-        "ext-mbstring": "*"
-    },
-    "require-dev": {
-		"phpunit/phpunit": "8.*",
-        "guzzlehttp/guzzle": "~6.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Nurkassa\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Nurkassa\\Tests\\": "tests/"
-        }
+  "name": "zmbakh/nurkassa-php-sdk",
+  "description": "A PHP SDK for working with the API of Nurkassa. Created by the owner company.",
+  "keywords": [
+    "php",
+    "sdk",
+    "nurkassa"
+  ],
+  "type": "library",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Zanggar Muratkhan",
+      "email": "zmbakh@gmail.com",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "ext-mbstring": "*",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "8.*",
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Nurkassa\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Nurkassa\\Tests\\": "tests/"
+    }
+  }
 }
