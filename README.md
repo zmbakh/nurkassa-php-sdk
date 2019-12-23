@@ -1,6 +1,6 @@
 # Nurkassa SDK for PHP v1
 
-[![Latest Stable Version](http://img.shields.io/badge/Latest%20Stable-1.2.4-blue.svg)](https://packagist.org/packages/zmbakh/nurkassa-php-sdk)
+[![Latest Stable Version](http://img.shields.io/badge/Latest%20Stable-1.3.0-blue.svg)](https://packagist.org/packages/zmbakh/nurkassa-php-sdk)
 
 ## Installation
 
@@ -14,7 +14,7 @@ Please be aware, that SDK only works with cURL or Guzzle 6.x out of the box.
 
 ## Usage
 
-> **Note:** The SDK requires PHP 7.1 or greater.
+> **Note:** The SDK requires PHP 7.2 or greater.
 
 Simple GET example of a list of the POSes.
 

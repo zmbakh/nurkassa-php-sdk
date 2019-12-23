@@ -110,4 +110,20 @@ class PosModel extends Model
 
         return $this->lastRequest;
     }
+
+    /**
+     * Get the receipt of the sale.
+     * Вывести чек от продажи.
+     *
+     * @param int $posID
+     * @param int $saleID
+     * @return NurkassaRequest
+     */
+    public function saleReceipt(int $posID, int $saleID): NurkassaRequest
+    {
+        $this->lastRequest = new NurkassaRequest('get', 'sale/'.$saleID.'/receipt', null, ['Pos-Id' => $posID]);
+        $this->lastRequest->setVersion(2);
+
+        return $this->lastRequest;
+    }
 }
