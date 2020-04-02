@@ -96,12 +96,17 @@ class PosModel extends Model
      * @param int   $status
      * @param array $goods
      * @param array $payment
+     * @param int   $qr
      *
      * @return NurkassaRequest
      */
-    public function handleSale(int $posID, int $status, array $goods, array $payment): NurkassaRequest
+    public function handleSale(int $posID, int $status, array $goods, array $payment, int $qr = null): NurkassaRequest
     {
         $data = compact('status', 'goods', 'payment');
+
+        if ($qr) {
+            $data = array_merge($data, ['qr' => $qr]);
+        }
 
         $request = new NurkassaRequest('post', 'sale', $data, ['Pos-Id' => $posID]);
         $request->setVersion(2);
