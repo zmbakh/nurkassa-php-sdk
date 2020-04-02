@@ -73,7 +73,7 @@ class PosModel extends Model
      *
      * @return NurkassaRequest
      */
-    public function shifts(int $id, string $dateFrom = null, string $dateTo = null):NurkassaRequest
+    public function shifts(int $id, string $dateFrom = null, string $dateTo = null): NurkassaRequest
     {
         $request = new NurkassaRequest('get', '/company/pos/'.$id.'/shifts');
 
