@@ -122,6 +122,7 @@ class PosModel extends Model
      *
      * @param int $posID
      * @param int $saleID
+     *
      * @return NurkassaRequest
      */
     public function saleReceipt(int $posID, int $saleID): NurkassaRequest

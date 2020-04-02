@@ -270,7 +270,7 @@ class NurkassaRequest
      *
      * @return bool
      */
-    public function hasFiles() : bool
+    public function hasFiles(): bool
     {
         return !empty($this->files);
     }
