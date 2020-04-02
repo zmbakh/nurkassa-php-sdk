@@ -18,7 +18,7 @@ class Nurkassa
     /**
      * @const string Current SDK version
      */
-    const CURRENT_SDK_VERSION = '1.3.1';
+    const CURRENT_SDK_VERSION = '1.3.2';
 
     /**
      * @var string Access token
